@@ -4,11 +4,11 @@
     "slug": "testproyect",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ICON_NUPEC.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/SPLASH_NUPEC.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -24,7 +24,7 @@
       "package": "com.luisblash.testapp",
       "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/ADAPTATIVE_ICON_NUPEC.png",
         "backgroundColor": "#FFFFFF"
       }
     },
