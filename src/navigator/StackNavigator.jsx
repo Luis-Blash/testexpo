@@ -7,7 +7,7 @@ import {
   ScreenRequest,
   ScreenSelectPets,
   ScreenSelectQuestion,
-  // ScreenViewModel,
+  ScreenViewModel,
   ScreenWelcome,
 } from "../screen";
 
@@ -39,8 +39,8 @@ export const StackNavigator = () => {
       />
       <Stack.Screen name={pathRoute.screenRequest} component={ScreenRequest} />
       <Stack.Screen name={pathRoute.screenCards} component={ScreenCards} />
-      {/*<Stack.Screen name={pathRoute.screenViewModel} component={ScreenViewModel} />
-      <Stack.Screen name={pathRoute.screenHome} component={ScreenHome} /> */}
+      <Stack.Screen name={pathRoute.screenViewModel} component={ScreenViewModel} />
+      {/*<Stack.Screen name={pathRoute.screenHome} component={ScreenHome} /> */}
     </Stack.Navigator>
   );
 };

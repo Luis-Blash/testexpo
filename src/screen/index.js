@@ -2,7 +2,7 @@
 import { ScreenRequest } from "./ScreenRequest";
 import { ScreenSelectPets } from "./ScreenSelectPets";
 import { ScreenWelcome } from "./ScreenWelcome";
-// import { ScreenViewModel } from "./ScreenViewModel";
+import { ScreenViewModel } from "./ScreenViewModel";
 import { ScreenSelectQuestion } from "./ScreenSelectQuestion";
 import { ScreenCards } from "./ScreenCards";
 
@@ -11,7 +11,7 @@ export {
     ScreenSelectPets,
     ScreenRequest,
     ScreenWelcome,
-    // ScreenViewModel,
+    ScreenViewModel,
     ScreenSelectQuestion,
     ScreenCards
 };
