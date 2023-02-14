@@ -19,7 +19,7 @@ let customFonts = {
 
 export const ScreenWelcome = ({ navigation }) => {
   const goNavigate = () => {
-    // navigation.navigate(pathRoute.screenSelectPets);
+    navigation.navigate(pathRoute.screenSelectPets);
     // navigation.navigate(pathRoute.screenViewModel, {
     //   typeModel: 1,
     //   map: "",
