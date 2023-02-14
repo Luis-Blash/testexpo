@@ -4,7 +4,7 @@ import { ScreenSelectPets } from "./ScreenSelectPets";
 import { ScreenWelcome } from "./ScreenWelcome";
 // import { ScreenViewModel } from "./ScreenViewModel";
 import { ScreenSelectQuestion } from "./ScreenSelectQuestion";
-// import { ScreenCards } from "./ScreenCards";
+import { ScreenCards } from "./ScreenCards";
 
 export {
     // ScreenHome,
@@ -13,5 +13,5 @@ export {
     ScreenWelcome,
     // ScreenViewModel,
     ScreenSelectQuestion,
-    // ScreenCards
+    ScreenCards
 };
