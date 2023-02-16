@@ -4,12 +4,10 @@ import { GLView } from "expo-gl";
 import {
   HemisphereLight,
   Mesh,
-  MeshPhongMaterial,
   PerspectiveCamera,
   Scene,
-  TextureLoader,
 } from "three";
-import { Renderer } from "expo-three";
+import ExpoTHREE, { Renderer, TextureLoader } from "expo-three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { Asset } from "expo-asset";
 
@@ -47,21 +45,25 @@ export const ScreenViewModel = ({ route }) => {
     const [{ localUri: localObj }] = await Asset.loadAsync(
       require("../../assets/costal/Costales.obj")
     );
-    const [{ localUri: imgLocal }] = await Asset.loadAsync(
-      require("../../assets/costal/tex2.jpg")
-    );
+    // const [{ localUri: imgLocal }] = await Asset.loadAsync(
+    //   require("../../assets/costal/tex2.jpg")
+    // );
 
-    const mapHeight = new TextureLoader().load(imgLocal);
 
-    material = new MeshPhongMaterial({
-      color: 0x552811,
-      specular: 0x222222,
-      shininess: 25,
-      bumpMap: mapHeight,
-      bumpScale: 12,
-    });
+    // This texture will be immediately ready but it'll load asynchronously
+    const texture = new TextureLoader().load(require("../../assets/costal/tex2.jpg"));
 
-    setLogConsole({ url: imgLocal });
+    // const mapHeight = new TextureLoader().load(imgLocal);
+
+    // material = new MeshPhongMaterial({
+    //   color: 0x552811,
+    //   specular: 0x222222,
+    //   shininess: 25,
+    //   bumpMap: mapHeight,
+    //   bumpScale: 12,
+    // });
+
+    setLogConsole({ url: texture });
 
     const loader = new OBJLoader();
     loader.load(
@@ -83,10 +85,20 @@ export const ScreenViewModel = ({ route }) => {
 
     // create render function
     const render = () => {
-      if (objectModel && material) {
+      // if (objectModel && material) {
+      //   objectModel.traverse((child) => {
+      //     if (child instanceof Mesh) {
+      //       child.material = material;
+      //       child.castShadow = false;
+      //       child.receiveShadow = false;
+      //     }
+      //   });
+      //   objectModel.rotation.y += 0.01
+      // }
+      if (objectModel) {
         objectModel.traverse((child) => {
           if (child instanceof Mesh) {
-            child.material = material;
+            child.material.map = texture;
             child.castShadow = false;
             child.receiveShadow = false;
           }
