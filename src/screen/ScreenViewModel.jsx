@@ -2,9 +2,12 @@ import { Dimensions, Text, View } from "react-native";
 import { useState } from "react";
 import { GLView } from "expo-gl";
 import {
-  AmbientLight,
+  HemisphereLight,
+  Mesh,
+  MeshPhongMaterial,
   PerspectiveCamera,
   Scene,
+  TextureLoader,
 } from "three";
 import { Renderer } from "expo-three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
@@ -14,8 +17,8 @@ const { width, height } = Dimensions.get("window");
 
 export const ScreenViewModel = ({ route }) => {
   const { params } = route;
-  const [logConsole, setLogConsole] = useState({})
-  const [logObj, setLogObj] = useState({})
+  const [logConsole, setLogConsole] = useState({});
+  const [logObj, setLogObj] = useState({});
   const onContextCreate = async (gl) => {
     // three.js implementation.
     const scene = new Scene();
@@ -30,48 +33,66 @@ export const ScreenViewModel = ({ route }) => {
       height: gl.drawingBufferHeight,
     };
 
-    const light = new AmbientLight( 0x404040 );
-    light.intensity = 2
-    scene.add( light );
+    let objectModel = null;
+    let material = null;
 
-    // set camera position away from cube
     camera.position.z = 2;
 
+    const hemisLight = new HemisphereLight(0xffffff, 0x111122);
+    scene.add(hemisLight);
+
     const renderer = new Renderer({ gl });
-    // set size of buffer to be equal to drawing buffer width
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-    const [{ localUri }] = await Asset.loadAsync(require('../../assets/costal/Costales.obj'));
-    setLogConsole({url: localUri})
-    //! create cube
+    const [{ localUri: localObj }] = await Asset.loadAsync(
+      require("../../assets/costal/Costales.obj")
+    );
+    const [{ localUri: imgLocal }] = await Asset.loadAsync(
+      require("../../assets/costal/tex2.jpg")
+    );
+
+    const mapHeight = new TextureLoader().load(imgLocal);
+
+    material = new MeshPhongMaterial({
+      color: 0x552811,
+      specular: 0x222222,
+      shininess: 25,
+      bumpMap: mapHeight,
+      bumpScale: 12,
+    });
+
+    setLogConsole({ url: imgLocal });
+
     const loader = new OBJLoader();
     loader.load(
-      localUri,
-      function ( object ) {
-        scene.add(object)
-        setLogObj({complete: "completo"})
-        
+      localObj,
+      function (object) {
+        objectModel = object;
+        objectModel.position.z = 1
+        scene.add(object);
+        setLogObj({ complete: "completo" });
       },
-      function ( xhr ) {
-        setLogObj({complete: "progreso"})
+      function (xhr) {
+        setLogObj({ complete: "progreso" });
       },
-      function ( error ) {
-        setLogObj({complete: "error", err: error})
-        console.log( 'An error happened' );
+      function (error) {
+        setLogObj({ complete: "error", err: error });
+        console.log("An error happened");
       }
     );
-    
-
-    // define geometry
-    // const geometry = new BoxBufferGeometry(1, 1, 1);
-    // const material = new MeshBasicMaterial({
-    //   color: "cyan",
-    // });
-    // const cube = new Mesh(geometry, material);
-    // scene.add(cube);
 
     // create render function
     const render = () => {
+      if (objectModel && material) {
+        objectModel.traverse((child) => {
+          if (child instanceof Mesh) {
+            child.material = material;
+            child.castShadow = false;
+            child.receiveShadow = false;
+          }
+        });
+        objectModel.rotation.y += 0.01
+      }
       requestAnimationFrame(render);
       renderer.render(scene, camera);
       gl.endFrameEXP();
@@ -86,7 +107,9 @@ export const ScreenViewModel = ({ route }) => {
         style={{ height: "100%", width: "100%" }}
         onContextCreate={onContextCreate}
       />
-      <View style={{position: 'absolute', bottom: 100, left: 100, width: '80%'}}>
+      <View
+        style={{ position: "absolute", bottom: 100, left: 100, width: "80%" }}
+      >
         <Text>{JSON.stringify(logConsole)}</Text>
         <Text>{JSON.stringify(logObj)}</Text>
       </View>

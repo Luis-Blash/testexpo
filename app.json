@@ -22,7 +22,7 @@
     },
     "android": {
       "package": "com.luisblash.testapp",
-      "versionCode": 1,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/ADAPTATIVE_ICON_NUPEC.png",
         "backgroundColor": "#FFFFFF"
