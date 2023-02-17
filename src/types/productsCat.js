@@ -43,7 +43,7 @@ const productsCat = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_FELINO_KITTEN.jpg"),
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_FELINO_KITTEN_AL.png"),
     },
   },
   {
@@ -60,7 +60,7 @@ const productsCat = [
     model: {
       type: typeModal.cans,
       obj: "",
-      map: require("../../assets/lata/texture/HUMEDO_FELINO_KITTEN_AL.png"),
+      map: require("../../assets/lata/texture/TXT_HUMEDO_FELINO_KITTEN_AL.png"),
     },
   },
   {
@@ -75,9 +75,9 @@ const productsCat = [
       "Vitaminas del complejo B y romero que regulan el sistema nervioso y mejoran el estado de ánimo",
     ],
     model: {
-      type: typeModal.costal,
+      type: typeModal.costal2,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_FELINO_INDOOR.jpg"),
+      map: require("../../assets/costal2/textures/TXT_MANTENIMIENTO_FELINO_INDOOR_AL.png"),
     },
   },
   {
@@ -94,7 +94,7 @@ const productsCat = [
     model: {
       type: typeModal.cans,
       obj: "",
-      map: require("../../assets/lata/texture/HUMEDO_FELINO_INDOOR_AL.png"),
+      map: require("../../assets/lata/texture/TXT_HUMEDO_FELINO_INDOOR_AL.png"),
     },
   },
   {
@@ -109,9 +109,9 @@ const productsCat = [
       "Vitaminas, minerales y ácidos grasos omega 3 y 6 para promover un pelaje lustroso y saludable",
     ],
     model: {
-      type: typeModal.costal,
+      type: typeModal.costal2,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_HAIRBALLCONTROL.jpg"),
+      map: require("../../assets/costal2/textures/TXT_ESPECIALIDAD_FELINO_HAIRBALLCONTROL_AL.png"),
     },
   },
   {
@@ -128,7 +128,7 @@ const productsCat = [
     model: {
       type: typeModal.cans,
       obj: "",
-      map: require("../../assets/lata/texture/HUMEDO_FELINO_HAIRBALL_AL.png"),
+      map: require("../../assets/lata/texture/TXT_HUMEDO_FELINO_HAIRBALL_AL.png"),
     },
   },
   {
@@ -145,7 +145,7 @@ const productsCat = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_SENIOR.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_SENIOR_AL.png"),
     },
   },
   {
@@ -160,9 +160,9 @@ const productsCat = [
       "L-carnitina para promover el metabolismo de las grasas",
     ],
     model: {
-      type: typeModal.costal,
+      type: typeModal.costal2,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_WEIGHTCARE.jpg"),
+      map: require("../../assets/costal2/textures/TXT_ESPECIALIDAD_FELINO_WEIGHTCARE_AL.png"),
     },
   },
   {
@@ -177,9 +177,9 @@ const productsCat = [
       "Nutrientes de fácil digestión y absorción",
     ],
     model: {
-      type: typeModal.costal,
+      type: typeModal.costal2,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_DIGESTIVEHEALTH.jpg"),
+      map: require("../../assets/costal2/textures/TXT_ESPECIALIDAD_FELINO_DIGESTIVEHEALTH_AL.png"),
     },
   },
   {
@@ -194,9 +194,9 @@ const productsCat = [
       "Niveles de minerales controlados para prevenir y evitar la formación de cristales en la orina",
     ],
     model: {
-      type: typeModal.costal,
+      type: typeModal.costal2,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_URINARYMANAGMENT.jpg"),
+      map: require("../../assets/costal2/textures/TXT_ESPECIALIDAD_FELINO_URINARYMANAGMENT_AL.png"),
     },
   },
   {
@@ -213,7 +213,7 @@ const productsCat = [
     model: {
       type: typeModal.cans,
       obj: "",
-      map: require("../../assets/lata/texture/HUMEDO_FELINO_URINARY_AL.png"),
+      map: require("../../assets/lata/texture/TXT_HUMEDO_FELINO_URINARY_AL.png"),
     },
   },
   {
@@ -228,9 +228,9 @@ const productsCat = [
       "Restricción proteica para disminuir el trabajo renal",
     ],
     model: {
-      type: typeModal.cans,
+      type: typeModal.costal2,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_RENALCARE.jpg"),
+      map: require("../../assets/costal2/textures/TXT_ESPECIALIDAD_FELINO_RENALCARE_AL.png"),
     },
   },
 ];

@@ -44,7 +44,6 @@ const styleGlobal = StyleSheet.create({
     color: "white",
     fontSize: 42,
     lineHeight: 84,
-    fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "#000000c0",
   },
@@ -68,8 +67,8 @@ const styleWelcome = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft: 70,
-    paddingRight: 70,
+    paddingLeft: "10%",
+    paddingRight: "10%",
   },
 });
 

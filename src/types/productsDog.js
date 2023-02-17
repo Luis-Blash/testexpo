@@ -29,6 +29,7 @@ const typeModal = {
   costal: 0,
   prize: 1,
   cans: 2,
+  costal2: 3
 };
 
 const base = {
@@ -59,7 +60,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_CACHORRO_RM.jpg"),
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_CACHORRO_RM_AL.png"),
     },
   },
   {
@@ -76,7 +77,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_ADULTO_RM.jpg"),
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_ADULTO_RM_AL.png"),
     },
   },
   {
@@ -93,7 +94,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_CACHORRO.jpg"),
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_CACHORRO_AL.png"),
     },
   },
   {
@@ -110,7 +111,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_CHACHORRO_RP.jpg"),
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_CHACHORRO_RP_AL.png"),
     },
   },
   {
@@ -127,7 +128,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_ADULTO_RM.jpg"), //! sin textura
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_ADULTO_RP_AL.png"), //! sin textura
     },
   },
   {
@@ -144,7 +145,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_ADULTO.jpg"),
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_ADULTO_AL.png"),
     },
   },
   {
@@ -161,7 +162,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_SENIOR.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_FELINO_SENIOR_AL.png"),
     },
   },
   {
@@ -178,13 +179,13 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_SENIOR_RP.jpg"),
+      map: require("../../assets/costal/textures/TXT_MANTENIMIENTO_CANINO_SENIOR_RP_AL.png"),
     },
   },
   {
     ...base,
     id: namesProductsDogs.NUPEC_1ST_CARE_CACHORRO,
-    title: "NUPEC Firs Care", //!imagen
+    title: "NUPEC Firs Care",
     subtitle: "Raza pequeña",
     imgCostal: require("../../assets/productos/Nupec-Senior-1.png"),
     points: [
@@ -195,13 +196,13 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_FIRST CARE.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_FIRSTCARE_AL.png"),
     },
   },
   {
     ...base,
     id: namesProductsDogs.NUPEC_1ST_CARE,
-    title: "NUPEC Firs Care", //!imagen
+    title: "NUPEC Firs Care",
     subtitle: "",
     imgCostal: require("../../assets/productos/Nupec-Senior-1.png"),
     points: [
@@ -212,7 +213,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_FIRST CARE.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_FIRSTCARE_AL.png"),
     },
   },
   {
@@ -229,7 +230,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_HIGHPERFORMANCE.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_HIGHPERFORMANCE_AL.png"),
     },
   },
   {
@@ -246,7 +247,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_WEIGHTCONTROL.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_WEIGHTCONTROL_AL.png"),
     },
   },
   {
@@ -263,7 +264,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_WEIGHTCONTROL_RP.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_WEIGHTCONTROL_RP_AL.png"),
     },
   },
   {
@@ -280,7 +281,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_SENSITIVE.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_SENSITIVE_AL.png"),
     },
   },
   {
@@ -297,7 +298,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_SENSITIVE_RP.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_SENSITIVE_RP_AL.png"),
     },
   },
   {
@@ -314,7 +315,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_DIGESTIVEHEALTH.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_DIGESTIVEHEALTH_AL.png"),
     },
   },
   {
@@ -331,7 +332,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_URINARYMANAGMENT.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_URINARYMANAGMENT_AL.png"),
     },
   },
   {
@@ -348,7 +349,7 @@ const productsDog = [
     model: {
       type: typeModal.costal,
       obj: "",
-      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_RENALCARE.jpg"),
+      map: require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_RENALCARE_AL.png"),
     },
   },
   {
@@ -364,7 +365,7 @@ const productsDog = [
     model: {
       type: typeModal.prize,
       obj: "",
-      map: require("../../assets/premios/textures/TREATS_RELAX_AL.png"),
+      map: require("../../assets/premios/textures/TXT_TREATS_RELAX_AL.png"),
     },
   },
   {
@@ -380,7 +381,7 @@ const productsDog = [
     model: {
       type: typeModal.prize,
       obj: "",
-      map: require("../../assets/premios/textures/TREATS_TRAINING_AL.png"),
+      map: require("../../assets/premios/textures/TXT_TREATS_TRAINING_AL.png"),
     },
   },
   {
@@ -396,7 +397,7 @@ const productsDog = [
     model: {
       type: typeModal.prize,
       obj: "",
-      map: require("../../assets/premios/textures/TREATS_DENTALCARE_AL.png"),
+      map: require("../../assets/premios/textures/TXT_TREATS_DENTALCARE_AL.png"),
     },
   },
   {
@@ -412,7 +413,7 @@ const productsDog = [
     model: {
       type: typeModal.prize,
       obj: "",
-      map: require("../../assets/premios/textures/TREATS_SMART_AL.png"),
+      map: require("../../assets/premios/textures/TXT_TREATS_SMART_AL.png"),
     },
   },
   {
@@ -428,7 +429,7 @@ const productsDog = [
     model: {
       type: typeModal.prize,
       obj: "",
-      map: require("../../assets/premios/textures/TREATS_JOINTCARE_AL.png"),
+      map: require("../../assets/premios/textures/TXT_TREATS_JOINTCARE_AL.png"),
     },
   },
   {
@@ -444,7 +445,7 @@ const productsDog = [
     model: {
       type: typeModal.prize,
       obj: "",
-      map: require("../../assets/premios/textures/TREATS_DIGESTIVE_AL.png"),
+      map: require("../../assets/premios/textures/TXT_TREATS_DIGESTIVECARE_AL.png"),
     },
   },
 ];

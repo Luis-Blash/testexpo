@@ -1,4 +1,4 @@
-import { ImageBackground, Text, View } from "react-native";
+import { Dimensions, ImageBackground, Text, View } from "react-native";
 import { ButonPrimary } from "../components/Buttons/ButonPrimary";
 import { pathRoute } from "../navigator";
 import { styleWelcome } from "../theme/stylesGlobal";
@@ -7,6 +7,9 @@ import { styleResponsive } from "../theme/stylesResponsive";
 import { useCallback, useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
+import { typeModal } from "../types/productsDog";
+
+const { height, width } = Dimensions.get("window");
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -19,12 +22,19 @@ let customFonts = {
 
 export const ScreenWelcome = ({ navigation }) => {
   const goNavigate = () => {
-    // navigation.navigate(pathRoute.screenSelectPets);
+    navigation.navigate(pathRoute.screenSelectPets);
+    // navigation.navigate(pathRoute.screenViewModel, {
+    //   typeModel: 1,
+    //   map: "",
+    // });
+  };
+
+  const modelsGo = (map, type) => {
     navigation.navigate(pathRoute.screenViewModel, {
-      typeModel: -1,
-      mapCostal: "",
-      mapLata: "",
-      mapPremios: "",
+      typeModel: type,
+      mapCostal: type === typeModal.costal ? map : "",
+      mapLata: type === typeModal.cans ? map : "",
+      mapPremios: type === typeModal.prize ? map : "",
     });
   };
   const [appIsReady, setAppIsReady] = useState(false);
@@ -71,18 +81,73 @@ export const ScreenWelcome = ({ navigation }) => {
           >
             ¡Bienvenidos!
           </Text>
-          <Text style={{ ...styleResponsive.textH1Welcome, marginBottom: 10 }}>
-            NUPEC
-          </Text>
+          <View style={{flexDirection: 'row', marginBottom: 10}}>
+            <Text
+              style={{ ...styleResponsive.textH1Welcome }}
+            >
+              NUPEC
+            </Text>
+            <Text style={{ ...styleResponsive.textSubIndiceWelcome}}>MR</Text>
+          </View>
           <Text style={{ ...styleResponsive.textH2Welcome, marginBottom: 20 }}>
-            Estas listo para conocer mas acerca de nuestros productos y conocer
-            lo que mas favorece a tu mascota.
+            Estás listo para conocer más acerca de nuestros productos y conocer
+            lo que más favorece a tu mascota.
           </Text>
           <ButonPrimary action={goNavigate}>Comenzar</ButonPrimary>
+          <View style={{ marginBottom: 5, marginTop: 10 }}>
+            <ButonPrimary
+              action={() => {
+                modelsGo(
+                  require("../../assets/lata/texture/TXT_HUMEDO_CANINO_SENIOR_AL.png"),
+                  typeModal.cans
+                );
+              }}
+            >
+              Lata
+            </ButonPrimary>
+          </View>
+          <View style={{ marginBottom: 5, marginTop: 5 }}>
+            <ButonPrimary
+              action={() => {
+                modelsGo(
+                  require("../../assets/premios/ColorTest.png"),
+                  typeModal.prize
+                );
+              }}
+            >
+              Premios
+            </ButonPrimary>
+          </View>
+          <View style={{ marginBottom: 5, marginTop: 5 }}>
+            <ButonPrimary
+              action={() => {
+                modelsGo(
+                  require("../../assets/costal/textures/TXT_ESPECIALIDAD_CANINO_DIGESTIVEHEALTH_AL.png"),
+                  typeModal.costal
+                );
+              }}
+            >
+              Costales1
+            </ButonPrimary>
+          </View>
+          <View style={{ marginBottom: 5, marginTop: 5 }}>
+            <ButonPrimary
+              action={() => {
+                modelsGo(
+                  require("../../assets/costal2/textures/TXT_ESPECIALIDAD_FELINO_DIGESTIVEHEALTH_AL.png"),
+                  typeModal.costal2
+                );
+              }}
+            >
+              Costales2
+            </ButonPrimary>
+          </View>
         </View>
       </ImageBackground>
       <View style={{ position: "absolute", zIndex: 1, bottom: 10, left: 10 }}>
-        <Text style={{ color: "white" }}>V-{version}</Text>
+        <Text style={{ color: "white" }}>
+          V-{version} h: {height.toFixed(2)} x w: {width.toFixed(2)}
+        </Text>
       </View>
     </View>
   );

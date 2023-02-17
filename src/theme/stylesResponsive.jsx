@@ -9,21 +9,23 @@ let paddinsXSelectPets = 80;
 let paddinBottonQuestion = height < 700 ? 20 : 30;
 let imagesContainerQuestion = height < 700 ? 150 : 200;
 let paddingYcontainerButtons = height < 700 ? 6 : 12;
-let fontSizeContainerQuestion = 12;
-let paddinXRequest = 70;
-let fontSizePoints = 16;
+let fontSizeContainerQuestion = 10;
+let paddinXRequest = 20;
+let fontSizePoints = 13;
 let fontSizeButtonPrimary = 15;
-let containerWidthPoints = "40%";
 let paddinxContianerPoints = "10%";
 let fontsizeContainerSelect = 13;
+let titleHeaderSelectCard = 20;
+let widthSelectCardContainerImg = "40%"
 // height < 700 ? 20 : 50
 //* 700 mini
 //* 800 normal
 //* 900 grande
-if (height >= 700 && height <= 900) {
-  fontSizeWelcome = 40;
-  fontSizeWelcomeSub = 20;
-  fontSizeContainerQuestion = 12;
+if ( height <= 799) {
+
+} else if (height >= 800 && height <= 900) {
+  paddinXRequest = 50;
+  fontSizePoints = 16;
 } else if (height >= 901) {
   fontSizeWelcome = 50;
   fontSizeWelcomeSub = 30;
@@ -32,8 +34,9 @@ if (height >= 700 && height <= 900) {
   paddinXRequest = 200;
   fontSizePoints = 20;
   fontSizeButtonPrimary = 25;
-  containerWidthPoints = "25%";
   fontsizeContainerSelect = 20;
+  titleHeaderSelectCard = 30;
+  widthSelectCardContainerImg = "30%"
 }
 
 const styleResponsive = StyleSheet.create({
@@ -48,11 +51,14 @@ const styleResponsive = StyleSheet.create({
     fontFamily: FontFamilyType.gothabold,
     fontSize: fontSizeWelcome,
   },
+  textSubIndiceWelcome: {
+    color: "white",
+    fontFamily: FontFamilyType.gothabold,
+  },
   textH2Welcome: {
     fontSize: fontSizeWelcomeSub,
     fontFamily: FontFamilyType.gothalight,
     color: "white",
-    fontWeight: "300",
     textAlign: "center",
   },
   selectPetContainer: {
@@ -102,11 +108,7 @@ const styleResponsive = StyleSheet.create({
   },
   fontSizeListPoints: {
     fontSize: fontSizePoints,
-    fontWeight: "300",
     fontFamily: FontFamilyType.gothalight,
-  },
-  containerPointsSelectQuestion: {
-    width: containerWidthPoints,
   },
   contianerPointsCards: {
     flexDirection: "row",
@@ -116,7 +118,16 @@ const styleResponsive = StyleSheet.create({
   selectButtonText: {
     fontFamily: FontFamilyType.gothabold,
     fontSize: fontsizeContainerSelect,
-  }
+  },
+  titleHeaderSelectCard: {
+    fontFamily: FontFamilyType.gothabold,
+    color: Colors.secondaryblue,
+    fontSize: titleHeaderSelectCard,
+  },
+  subcontainerimagesSelectCard: {
+    width: widthSelectCardContainerImg,
+    height: "100%",
+  },
 });
 
 export { styleResponsive };

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Image, ImageBackground, Text, View } from "react-native";
 import { ButonPrimary } from "../components/Buttons/ButonPrimary";
 import { pathRoute } from "../navigator";
@@ -8,7 +8,8 @@ import { ButtonIcon } from "../components/Buttons/ButtonIcon";
 import { styleSelectQuestion } from "../theme/styleSelectQuestion";
 import { useQuestion } from "../hooks/useQuestion";
 import { styleResponsive } from "../theme/stylesResponsive";
-import { Colors, FontFamilyType } from "../theme/stylesGlobal";
+import { Colors } from "../theme/stylesGlobal";
+import { HeaderBack } from "../components/Headers/HeaderBack";
 
 export const ScreenSelectQuestion = ({ navigation, route }) => {
   const {
@@ -99,10 +100,11 @@ export const ScreenSelectQuestion = ({ navigation, route }) => {
           style={styleSelectQuestion.imgback}
         >
           <View style={styleSelectQuestion.containerheader}>
-            <Header
-              backQuestion={backQuestion}
+            <HeaderBack
+              action={backQuestion}
               isFirstQuestion={isFirstQuestion}
               name={infoQuestion.name}
+              img={require("../../assets/iconos/flecha.png")}
             />
           </View>
           <View style={styleSelectQuestion.body}>
@@ -126,27 +128,6 @@ export const ScreenSelectQuestion = ({ navigation, route }) => {
   }
 };
 
-const Header = ({
-  backQuestion = () => {},
-  name = "",
-  isFirstQuestion = false,
-}) => {
-  return (
-    <View style={styleSelectQuestion.header}>
-      <View>
-        {isFirstQuestion && (
-          <ButtonIcon
-            action={backQuestion}
-            img={require("../../assets/iconos/flecha.png")}
-          />
-        )}
-      </View>
-      <Text style={styleSelectQuestion.textHeader}>{name}</Text>
-      <View />
-    </View>
-  );
-};
-
 const ImagesQuestion = ({
   name = "",
   img = "",
@@ -166,17 +147,16 @@ const ImagesQuestion = ({
         <Text style={styleResponsive.textBodyQuestion}>{name}</Text>
       </View>
       {info.text !== "" && (
-        <View style={{  alignItems: "center", marginBottom: 10,}}>
-          <View style={{ ...styleResponsive.containerPointsSelectQuestion }}>
+        <View
+          style={{ marginBottom: 10, paddingLeft: "28%", paddingRight: "20%" }}
+        >
+          <View style={{}}>
             <Text style={styleResponsive.textFonsizeContiainerQuestion}>
               {info.text}
             </Text>
           </View>
           {info.points.map((point, index) => (
-            <View
-              key={`${index}-info`}
-              style={{ ...styleResponsive.containerPointsSelectQuestion, paddingLeft: 18 }}
-            >
+            <View key={`${index}-info`} style={{ paddingLeft: 10 }}>
               <View style={{ flexDirection: "row" }}>
                 <Text style={styleResponsive.textFonsizeContiainerQuestion}>
                   {"\u2022"}
@@ -210,7 +190,7 @@ const Body = ({
   return (
     <View style={styleResponsive.containerSelectQuestion}>
       {questions.map((answer, i) => {
-        let style = {borderWidth: 2, borderColor: Colors.primarygrayblack};
+        let style = { borderWidth: 2, borderColor: Colors.primarygrayblack };
         let isSelect = false;
         if (selectQuestionId === answer.id) {
           isSelect = true;
@@ -235,7 +215,12 @@ const Body = ({
             ) : (
               <View />
             )}
-            <Text style={{ ...styleResponsive.selectButtonText ,color: isSelect ? "#0085CA" : Colors.primarygrayblack }}>
+            <Text
+              style={{
+                ...styleResponsive.selectButtonText,
+                color: isSelect ? "#0085CA" : Colors.primarygrayblack,
+              }}
+            >
               {answer.name}
             </Text>
             <View />

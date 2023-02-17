@@ -23,6 +23,32 @@ export const useCarrusel = () => {
     }
   }, [cardProducts]);
 
+  const backInfo = () => {
+    let info = {
+      title: "",
+      subtitle: "",
+      img: "",
+      points: [],
+      model: {
+        type: -1,
+        obj: "",
+        map: "",
+      },
+    };
+    if(selectProduct > 0){
+      let number = selectProduct - 1;
+      const { title, subtitle, imgCostal, points, model } =
+        cardProducts[number];
+      info.img = imgCostal;
+      info.title = title;
+      info.subtitle = subtitle;
+      info.points = points;
+      info.model = model;
+      setselectProduct(number);
+      setInfoView(info);
+    }
+  };
+
   const nextInfo = () => {
     let info = {
       title: "",
@@ -35,15 +61,7 @@ export const useCarrusel = () => {
         map: "",
       },
     };
-    if (selectProduct === cardProducts.length - 1) {
-      const { title, subtitle, imgCostal, points, model } = cardProducts[0];
-      info.img = imgCostal;
-      info.title = title;
-      info.subtitle = subtitle;
-      info.points = points;
-      info.model = model;
-      setselectProduct(0);
-    } else {
+    if (selectProduct < cardProducts.length - 1) {
       let number = selectProduct + 1;
       const { title, subtitle, imgCostal, points, model } =
         cardProducts[number];
@@ -53,8 +71,8 @@ export const useCarrusel = () => {
       info.points = points;
       info.model = model;
       setselectProduct(number);
+      setInfoView(info);
     }
-    setInfoView(info);
   };
 
   return {
@@ -63,5 +81,8 @@ export const useCarrusel = () => {
     isCardExist: cardProducts.length > 0,
     nextInfo,
     totalCard: cardProducts.length,
+    backInfo,
+    isBackButton: selectProduct > 0,
+    isNextButton: selectProduct < cardProducts.length - 1,
   };
 };

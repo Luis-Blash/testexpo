@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { pathRoute } from ".";
 import {
   ScreenCards,
-  // ScreenHome,
+  ScreenHome,
   ScreenRequest,
   ScreenSelectPets,
   ScreenSelectQuestion,
@@ -33,14 +33,11 @@ export const StackNavigator = () => {
         name={pathRoute.screenSelectPets}
         component={ScreenSelectPets}
       />
-      <Stack.Screen
-        name={pathRoute.screenSelectQuestion}
-        component={ScreenSelectQuestion}
-      />
+      <Stack.Screen name={pathRoute.screenSelectQuestion} component={ScreenSelectQuestion} />
       <Stack.Screen name={pathRoute.screenRequest} component={ScreenRequest} />
       <Stack.Screen name={pathRoute.screenCards} component={ScreenCards} />
       <Stack.Screen name={pathRoute.screenViewModel} component={ScreenViewModel} />
-      {/*<Stack.Screen name={pathRoute.screenHome} component={ScreenHome} /> */}
+      <Stack.Screen name={pathRoute.screenHome} component={ScreenHome} />
     </Stack.Navigator>
   );
 };

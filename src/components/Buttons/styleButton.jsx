@@ -17,7 +17,7 @@ const styleButtons = StyleSheet.create({
   },
   containerIcon: {
     width: 15,
-    height: 20
+    height: 20,
   },
   containerCircule: {
     backgroundColor: 'white',

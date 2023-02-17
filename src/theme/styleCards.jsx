@@ -3,17 +3,14 @@ import { Colors, FontFamilyType } from "./stylesGlobal";
 
 const styleCards = StyleSheet.create({
   textloading: {
-    fontFamily: FontFamilyType.gothabold,
+    fontFamily: FontFamilyType.gothablack,
     color: "white",
     fontSize: 25,
     textAlign: "center",
-    fontWeight: "bold",
   },
   header: {
     height: "10%",
     backgroundColor: Colors.secondaryblue,
-    justifyContent: "center",
-    alignItems: "center",
   },
   headerText: {
     color: "white",
@@ -23,8 +20,7 @@ const styleCards = StyleSheet.create({
   titleHeader: {
     fontFamily: FontFamilyType.gothabold,
     color: Colors.secondaryblue,
-    fontSize: 25,
-    fontWeight: "bold",
+    fontSize: 20,
   },
   subtitleHeader: {
     fontFamily: FontFamilyType.gothabold,
@@ -41,8 +37,8 @@ const styleCards = StyleSheet.create({
     alignItems: "center",
   },
   subcontainerimages: {
-    width: 200,
-    height: 200,
+    width: "40%",
+    height: "100%",
   },
   images: {
     width: "100%",

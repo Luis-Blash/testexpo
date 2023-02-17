@@ -4,8 +4,8 @@ import { Colors, FontFamilyType } from "./stylesGlobal";
 const styleRequest = StyleSheet.create({
   card: {
     backgroundColor: "white",
-    paddingLeft: 22,
-    paddingRight: 22,
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingTop: 55,
     paddingBottom: 55,
     borderRadius: 20,
@@ -14,15 +14,16 @@ const styleRequest = StyleSheet.create({
   },
   cardH1: {
     fontFamily: FontFamilyType.gothabold,
-    fontSize: 35,
+    fontSize: 30,
     textAlign: "center",
     marginBottom: 15,
+    color: Colors.secondaryblue
   },
   cardText: {
     fontFamily: FontFamilyType.gothabold,
     textAlign: "center",
     color: Colors.primarygrayblack,
-    fontSize: 18
+    fontSize: 15
   },
   img: {
     width: 100,

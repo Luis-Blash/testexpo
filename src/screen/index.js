@@ -1,4 +1,4 @@
-// import { ScreenHome } from "./ScreenHome";
+import { ScreenHome } from "./ScreenHome";
 import { ScreenRequest } from "./ScreenRequest";
 import { ScreenSelectPets } from "./ScreenSelectPets";
 import { ScreenWelcome } from "./ScreenWelcome";
@@ -7,7 +7,7 @@ import { ScreenSelectQuestion } from "./ScreenSelectQuestion";
 import { ScreenCards } from "./ScreenCards";
 
 export {
-    // ScreenHome,
+    ScreenHome,
     ScreenSelectPets,
     ScreenRequest,
     ScreenWelcome,

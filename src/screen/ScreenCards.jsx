@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Image, ImageBackground, Text, View } from "react-native";
 import { ButonPrimary } from "../components/Buttons/ButonPrimary";
 import { ButtonCircule } from "../components/Buttons/ButtonCircule";
+import { ButtonIcon } from "../components/Buttons/ButtonIcon";
 import { ContainerProduct } from "../components/Container/ContainerProduct";
+import { HeaderBack } from "../components/Headers/HeaderBack";
 import { PetContext } from "../context/PetContext";
 import { getCardsModal } from "../helpers/getModels";
 import { useCarrusel } from "../hooks/useCarrusel";
@@ -18,8 +20,15 @@ export const ScreenCards = ({ navigation }) => {
   } = useContext(PetContext);
 
   const [loadingModel, setLoadingModel] = useState(true);
-  const { setCardProducts, isCardExist, infoView, nextInfo, totalCard } =
-    useCarrusel();
+  const {
+    setCardProducts,
+    isCardExist,
+    infoView,
+    nextInfo,
+    totalCard,
+    backInfo,
+    isBackButton,
+  } = useCarrusel();
 
   const getCards = () => {
     const { cards } = getCardsModal(answerQuestion, selectPet);
@@ -35,10 +44,10 @@ export const ScreenCards = ({ navigation }) => {
 
   const viewModel = () => {
     const { type, map } = infoView.model;
-    console.log( type, map);
     navigation.navigate(pathRoute.screenViewModel, {
       typeModel: type,
-      mapCostal: type === typeModal.costal ? map : "",
+      mapCostal:
+        type === typeModal.costal || type === typeModal.costal2 ? map : "",
       mapLata: type === typeModal.cans ? map : "",
       mapPremios: type === typeModal.prize ? map : "",
     });
@@ -56,8 +65,8 @@ export const ScreenCards = ({ navigation }) => {
           resizeMode="cover"
           style={{
             flex: 1,
-            paddingLeft: 70,
-            paddingRight: 70,
+            paddingLeft: 20,
+            paddingRight: 20,
             justifyContent: "center",
           }}
         >
@@ -78,19 +87,26 @@ export const ScreenCards = ({ navigation }) => {
             flex: 1,
           }}
         >
-          <Header>
-            <Text style={styleCards.headerText}>{selectPet}</Text>
-          </Header>
+          <View style={styleCards.header}>
+            <HeaderBack
+              action={backInfo}
+              isFirstQuestion={true}
+              name={selectPet}
+              img={require("../../assets/iconos/flecha.png")}
+            />
+          </View>
           <ContainerProduct stylesContainer={{ height: "75%" }}>
             <View style={styleCards.containerHeader}>
-              <Text style={styleCards.titleHeader}>{infoView.title}</Text>
+              <Text style={styleResponsive.titleHeaderSelectCard}>
+                {infoView.title}
+              </Text>
               <Text style={styleCards.subtitleHeader}>{infoView.subtitle}</Text>
             </View>
             <View style={styleCards.containerBody}>
               <ListPoints points={infoView.points} />
             </View>
             <View style={styleCards.containerImages}>
-              <View style={styleCards.subcontainerimages}>
+              <View style={styleResponsive.subcontainerimagesSelectCard}>
                 <Image style={styleCards.images} source={infoView.img} />
               </View>
             </View>
@@ -131,14 +147,6 @@ export const ScreenCards = ({ navigation }) => {
       </View>
     );
   }
-};
-
-const Header = ({ children }) => {
-  return (
-    <View style={styleCards.header}>
-      <Text>{children}</Text>
-    </View>
-  );
 };
 
 const ListPoints = ({ points = [] }) => {
