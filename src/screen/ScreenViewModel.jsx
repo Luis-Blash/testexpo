@@ -6,15 +6,15 @@ import {
   DoubleSide,
   Mesh,
   MeshBasicMaterial,
+  MeshPhongMaterial,
   PerspectiveCamera,
   PlaneGeometry,
   Scene,
-  TextureLoader,
 } from "three";
-import ExpoTHREE, { Renderer } from "expo-three";
-import { Asset } from "expo-asset";
-import sombraImp from "../../assets/sombralata/Sombra_AL.png";
+import ExpoTHREE, { Renderer, TextureLoader } from "expo-three";
 import { useState } from "react";
+import { Asset } from "expo-asset";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 const { width, height } = Dimensions.get("window");
 
 export const ScreenViewModel = ({ route }) => {
@@ -35,6 +35,14 @@ export const ScreenViewModel = ({ route }) => {
       height: gl.drawingBufferHeight,
     };
 
+    let position = { x: 0, y: 0, z: 0 };
+    let positionShadow = { x: 0, y: 0, z: 0 };
+    let rotation = { x: 0, y: 0, z: 0 };
+    let rotationShadow = { x: 0, y: 0, z: 0 };
+    position = { ...position, z: -80, y: -20 };
+    positionShadow = { ...positionShadow, z: -80, y: -20 };
+    rotation = { ...rotation };
+    rotationShadow = { ...rotationShadow };
     camera.position.set(0, 0, 5);
 
     const ambientLight = new AmbientLight(0xffffff);
@@ -55,30 +63,6 @@ export const ScreenViewModel = ({ route }) => {
     plane.rotation.set(-0.5, 0, 0);
     scene.add(plane);
 
-    //* plane texture assets png
-    const geometry1 = new PlaneGeometry(1, 1);
-    const material1 = new MeshBasicMaterial({
-      map: await ExpoTHREE.loadTextureAsync({
-        asset: require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"),
-      }),
-    });
-    const plane1 = new Mesh(geometry1, material1);
-    plane1.position.set(-1, -2, 0);
-    plane1.rotation.set(-0.5, 0, 0);
-    scene.add(plane1);
-
-    //* plane texture assets jpg
-    const geometry3 = new PlaneGeometry(1, 1);
-    const material3 = new MeshBasicMaterial({
-      map: await ExpoTHREE.loadTextureAsync({
-        asset: require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"),
-      }),
-    });
-    const plane3 = new Mesh(geometry3, material3);
-    plane3.position.set(1, -2, 0);
-    plane3.rotation.set(-0.5, 0, 0);
-    scene.add(plane3);
-
     //*plane texture url
     const geometry2 = new PlaneGeometry(1, 1);
     const material2 = new MeshBasicMaterial({
@@ -92,60 +76,74 @@ export const ScreenViewModel = ({ route }) => {
     plane2.rotation.set(-0.5, 0, 0);
     scene.add(plane2);
 
-    //*plane texture module url
-    const assetsTexture = Asset.fromModule(
-      require("../../assets/sombralata/TXT_Sombra_Costal_AL.png")
-    );
-    const geometry5 = new PlaneGeometry(1, 1);
-    const material5 = new MeshBasicMaterial({
-      map: await ExpoTHREE.loadTextureAsync({
-        asset: assetsTexture,
-      }),
-    });
-    const plane5 = new Mesh(geometry5, material5);
-    plane5.position.set(-1, 0, 0);
-    plane5.rotation.set(-0.5, 0, 0);
-    scene.add(plane5);
-
     //*plane texture module url2
-    //! assets
-    const assetrequire = require("../../assets/sombralata/TXT_Sombra_Costal_AL.png")
-    const assetDownload1 = Asset.fromModule(require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"));
-    const assetDownload = Asset.fromModule(require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"));
-    await assetDownload.downloadAsync();
-    const exampleImageUri = Image.resolveAssetSource(sombraImp).uri;
-    const imgLocal = Asset.fromURI(exampleImageUri);
-    //! assets
-    // const texture = new TextureLoader().load(
-    //   assetsTexture.uri
-    // );
-    // const geometry6 = new PlaneGeometry(1, 1);
-    // const material6 = new MeshBasicMaterial({
-    //   map: await ExpoTHREE.loadTextureAsync({
-    //     asset: assetDownload.localUri,
-    //   }),
-    // });
-    // const plane6 = new Mesh(geometry6, material6);
-    // plane6.position.set(1, 0, 0);
-    // plane6.rotation.set(-0.5, 0, 0);
-    // scene.add(plane6);
-    setlogConsole({
-      url: exampleImageUri,
-      localUri: imgLocal,
-      assetDownload,
-      assetrequire,
-      assetDownload1
+    const texture = new TextureLoader().load(
+      require("../../assets/sombralata/Sombra.xpng")
+    );
+    const geometry3 = new PlaneGeometry(1, 1);
+    const material3 = new MeshBasicMaterial({
+      map: texture,
     });
-    // const geometry6 = new PlaneGeometry(1, 1);
-    // const material6 = new MeshBasicMaterial({
-    //   map: await ExpoTHREE.loadTextureAsync({
-    //     asset: exampleImageUri,
-    //   }),
-    // });
-    // const plane6 = new Mesh(geometry6, material6);
-    // plane6.position.set(1, 0, 0);
-    // plane6.rotation.set(-0.5, 0, 0);
-    // scene.add(plane6);
+    const plane3 = new Mesh(geometry3, material3);
+    plane3.position.set(1, 1, 0);
+    plane3.rotation.set(-0.5, 0, 0);
+    scene.add(plane3);
+    //! assets
+    const assetDownload = Asset.fromModule(
+      require("../../assets/sombralata/Sombra.xpng")
+    );
+    await assetDownload.downloadAsync();
+    const childFuntion = (object, material, typeMaterial) => {
+      if (typeMaterial === 0) {
+        object.position.x = position.x;
+        object.position.y = position.y;
+        object.position.z = position.z;
+        object.rotation.x = rotation.x;
+        object.rotation.y = rotation.y;
+        object.rotation.z = rotation.z;
+      } else {
+        object.position.x = positionShadow.x;
+        object.position.y = positionShadow.y;
+        object.position.z = positionShadow.z;
+        object.rotation.x = rotationShadow.x;
+        object.rotation.y = rotationShadow.y;
+        object.rotation.z = rotationShadow.z;
+      }
+      object.traverse((child) => {
+        if (child instanceof Mesh) {
+          child.material = material;
+        }
+      });
+    };
+    const [{ localUri: localObj }] = await Asset.loadAsync(
+      require("../../assets/costal/Costal1.obj")
+    );
+    const texture1 = new TextureLoader().load(
+      require("../../assets/costal/ColorCostal.xpng")
+    );
+    const material1 = new MeshPhongMaterial({
+      map: texture1,
+      flatShading: true,
+      emissiveIntensity: 0,
+      shininess: 0,
+      reflectivity: 0,
+    });
+    const loader = new OBJLoader();
+    loader.load(
+      localObj,
+      function (object) {
+        childFuntion(object, material1, 0);
+        objectModel = object;
+        scene.add(object);
+      },
+      function (xhr) {},
+      function (error) {}
+    );
+
+    setlogConsole({
+      assetDownload,
+      localObj,
+    });
 
     const render = () => {
       requestAnimationFrame(render);

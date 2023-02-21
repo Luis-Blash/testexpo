@@ -2,7 +2,7 @@
   "expo": {
     "name": "testproyect",
     "slug": "testproyect",
-    "version": "0.31.0",
+    "version": "0.32.0",
     "orientation": "portrait",
     "icon": "./assets/ICON_NUPEC.png",
     "userInterfaceStyle": "light",
@@ -22,7 +22,7 @@
     },
     "android": {
       "package": "com.luisblash.testapp",
-      "versionCode": 5,
+      "versionCode": 10,
       "adaptiveIcon": {
         "foregroundImage": "./assets/ADAPTATIVE_ICON_NUPEC.png",
         "backgroundColor": "#FFFFFF"
