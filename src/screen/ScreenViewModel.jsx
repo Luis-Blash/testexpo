@@ -1,29 +1,29 @@
-import { Dimensions, Text, View } from "react-native";
-import { useState } from "react";
+import { Dimensions, Image, Text, View } from "react-native";
 import { GLView } from "expo-gl";
 import {
   AmbientLight,
-  DirectionalLight,
-  DirectionalLightHelper,
-  HemisphereLight,
+  Color,
+  DoubleSide,
   Mesh,
   MeshBasicMaterial,
-  MeshPhongMaterial,
-  NearestFilter,
   PerspectiveCamera,
+  PlaneGeometry,
   Scene,
+  TextureLoader,
 } from "three";
-import ExpoTHREE, { Renderer, TextureLoader } from "expo-three";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import ExpoTHREE, { Renderer } from "expo-three";
 import { Asset } from "expo-asset";
-import { typeModal } from "../types/productsDog";
+import sombraImp from "../../assets/sombralata/Sombra_AL.png";
+import { useState } from "react";
 const { width, height } = Dimensions.get("window");
 
 export const ScreenViewModel = ({ route }) => {
   const { params } = route;
+  const [logConsole, setlogConsole] = useState({ url: "" });
   const onContextCreate = async (gl) => {
     // three.js implementation.
     const scene = new Scene();
+    scene.background = new Color(0xff00ff);
     const camera = new PerspectiveCamera(
       75,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
@@ -34,157 +34,120 @@ export const ScreenViewModel = ({ route }) => {
       width: gl.drawingBufferWidth,
       height: gl.drawingBufferHeight,
     };
-    let objectModel = null;
-    let objectShadow = null;
-    let material = null;
-    let position = { x: 0, y: 0, z: 0 };
-    let rotation = { x: 0, y: 0, z: 0 };
-    let model = "";
-    let textures = "";
-    let modelShadow = "";
 
-    if (typeModal.costal === params.typeModel) {
-      model = require("../../assets/costal/Costal1.obj");
-      textures =
-        params.mapCostal === ""
-          ? require("../../assets/costal/ColorCostal.png")
-          : params.mapCostal;
-      position = { ...position, z: -80, y: -20 };
-      rotation = { ...rotation };
-    } else if (typeModal.cans === params.typeModel) {
-      model = require("../../assets/lata/Lata.obj");
-      textures =
-        params.mapLata === ""
-          ? require("../../assets/lata/lataColor.png")
-          : params.mapLata;
-      position = { ...position, z: -20 };
-      rotation = { ...rotation, x: 0.7 };
-    } else if (typeModal.prize === params.typeModel) {
-      modelShadow = require("../../assets/sombralata/Sombra.obj");
-      model = require("../../assets/premios/Treats.obj");
-      textures =
-        params.mapPremios === ""
-          ? require("../../assets/premios/ColorTreats.png")
-          : params.mapPremios;
-      position = { ...position, z: -35, y: -10 };
-      rotation = { ...rotation };
-    } else if (typeModal.costal2 === params.typeModel) {
-      model = require("../../assets/costal2/Costal2.obj");
-      textures =
-        params.mapCostal === ""
-          ? require("../../assets/costal2/textures/TXT_ESPECIALIDAD_FELINO_DIGESTIVEHEALTH_AL.png")
-          : params.mapCostal;
-      position = { ...position, z: -80, y: -20 };
-      rotation = { ...rotation };
-    }
-
-    camera.position.z = 2;
-
-    // const directionalLight = new DirectionalLight(0xffffff, 1);
-    // directionalLight.position.y = 5
-    // directionalLight.position.z = 5
-    // scene.add(directionalLight);
+    camera.position.set(0, 0, 5);
 
     const ambientLight = new AmbientLight(0xffffff);
-    ambientLight.intensity = 1
+    ambientLight.intensity = 1;
     scene.add(ambientLight);
-
-    // const hemisLight = new HemisphereLight(0xffffff, 0x000000);
-    // hemisLight.intensity = 1;
-    // scene.add(hemisLight);
 
     const renderer = new Renderer({ gl });
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-    if (model !== "" && textures !== "") {
-      const [{ localUri: localObj }] = await Asset.loadAsync(model);
-      const texture1 = new TextureLoader().load(textures);
-      // texture1.magFilter = NearestFilter;
-      // texture1.minFilter = NearestFilter;
-      // material = new MeshPhongMaterial({
-      //   map: texture1,
-      //   flatShading: true,
-      //   emissiveIntensity: 0,
-      //   shininess: 0,
-      //   reflectivity: 0,
-      // });
-      material = new MeshBasicMaterial({
-        map: texture1,
-        // flatShading: true,
-        // emissiveIntensity: 0,
-        // shininess: 0,
-        // reflectivity: 0,
-      });
-      const loader = new OBJLoader();
-      loader.load(
-        localObj,
-        function (object) {
-          object.position.x = position.x;
-          object.position.y = position.y;
-          object.position.z = position.z;
-          object.rotation.x = rotation.x;
-          object.rotation.y = rotation.y;
-          object.rotation.z = rotation.z;
-          object.traverse((child) => {
-            if (child instanceof Mesh) {
-              child.material = material;
-              child.castShadow = true;
-              child.receiveShadow = true;
-            }
-          });
-          objectModel = object;
-          scene.add(object);
-        },
-        function (xhr) {},
-        function (error) {}
-      );
+    //* plane
+    const geometry = new PlaneGeometry(1, 1);
+    const material = new MeshBasicMaterial({
+      color: 0xffff00,
+      side: DoubleSide,
+    });
+    const plane = new Mesh(geometry, material);
+    plane.position.set(0, 2, 0);
+    plane.rotation.set(-0.5, 0, 0);
+    scene.add(plane);
 
-      if (modelShadow !== "") {
-        const loader2 = new OBJLoader();
-        const [{ localUri: localObjSombra }] = await Asset.loadAsync(
-          modelShadow
-        );
-        const texture2 = new TextureLoader().load(
-          require("../../assets/sombralata/Sombra_AL.png")
-        );
-        texture2.magFilter = NearestFilter;
-        texture2.minFilter = NearestFilter;
-        const material2 = new MeshPhongMaterial({
-          map: texture2,
-          flatShading: true,
-          emissiveIntensity: 0,
-          shininess: 0,
-          reflectivity: 0,
-        });
-        loader2.load(
-          localObjSombra,
-          function (object) {
-            object.rotation.x = 0;
-            // object.rotation.y = 1;
-            object.position.y = -9.5 ;
-            object.position.z = position.z;
-            object.traverse((child) => {
-              if (child instanceof Mesh) {
-                child.material = material2;
-              }
-            });
-            objectShadow = object;
-            scene.add(object);
-          },
-          function (xhr) {},
-          function (error) {}
-        );
-      }
-    }
+    //* plane texture assets png
+    const geometry1 = new PlaneGeometry(1, 1);
+    const material1 = new MeshBasicMaterial({
+      map: await ExpoTHREE.loadTextureAsync({
+        asset: require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"),
+      }),
+    });
+    const plane1 = new Mesh(geometry1, material1);
+    plane1.position.set(-1, -2, 0);
+    plane1.rotation.set(-0.5, 0, 0);
+    scene.add(plane1);
 
-    // create render function
+    //* plane texture assets jpg
+    const geometry3 = new PlaneGeometry(1, 1);
+    const material3 = new MeshBasicMaterial({
+      map: await ExpoTHREE.loadTextureAsync({
+        asset: require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"),
+      }),
+    });
+    const plane3 = new Mesh(geometry3, material3);
+    plane3.position.set(1, -2, 0);
+    plane3.rotation.set(-0.5, 0, 0);
+    scene.add(plane3);
+
+    //*plane texture url
+    const geometry2 = new PlaneGeometry(1, 1);
+    const material2 = new MeshBasicMaterial({
+      map: await ExpoTHREE.loadTextureAsync({
+        asset:
+          "https://petapixel.com/assets/uploads/2017/08/IMG_20170826_183429_058.dng_-800x400.jpg",
+      }),
+    });
+    const plane2 = new Mesh(geometry2, material2);
+    plane2.position.set(0, 1, 0);
+    plane2.rotation.set(-0.5, 0, 0);
+    scene.add(plane2);
+
+    //*plane texture module url
+    const assetsTexture = Asset.fromModule(
+      require("../../assets/sombralata/TXT_Sombra_Costal_AL.png")
+    );
+    const geometry5 = new PlaneGeometry(1, 1);
+    const material5 = new MeshBasicMaterial({
+      map: await ExpoTHREE.loadTextureAsync({
+        asset: assetsTexture,
+      }),
+    });
+    const plane5 = new Mesh(geometry5, material5);
+    plane5.position.set(-1, 0, 0);
+    plane5.rotation.set(-0.5, 0, 0);
+    scene.add(plane5);
+
+    //*plane texture module url2
+    //! assets
+    const assetrequire = require("../../assets/sombralata/TXT_Sombra_Costal_AL.png")
+    const assetDownload1 = Asset.fromModule(require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"));
+    const assetDownload = Asset.fromModule(require("../../assets/sombralata/TXT_Sombra_Costal_AL.png"));
+    await assetDownload.downloadAsync();
+    const exampleImageUri = Image.resolveAssetSource(sombraImp).uri;
+    const imgLocal = Asset.fromURI(exampleImageUri);
+    //! assets
+    // const texture = new TextureLoader().load(
+    //   assetsTexture.uri
+    // );
+    // const geometry6 = new PlaneGeometry(1, 1);
+    // const material6 = new MeshBasicMaterial({
+    //   map: await ExpoTHREE.loadTextureAsync({
+    //     asset: assetDownload.localUri,
+    //   }),
+    // });
+    // const plane6 = new Mesh(geometry6, material6);
+    // plane6.position.set(1, 0, 0);
+    // plane6.rotation.set(-0.5, 0, 0);
+    // scene.add(plane6);
+    setlogConsole({
+      url: exampleImageUri,
+      localUri: imgLocal,
+      assetDownload,
+      assetrequire,
+      assetDownload1
+    });
+    // const geometry6 = new PlaneGeometry(1, 1);
+    // const material6 = new MeshBasicMaterial({
+    //   map: await ExpoTHREE.loadTextureAsync({
+    //     asset: exampleImageUri,
+    //   }),
+    // });
+    // const plane6 = new Mesh(geometry6, material6);
+    // plane6.position.set(1, 0, 0);
+    // plane6.rotation.set(-0.5, 0, 0);
+    // scene.add(plane6);
+
     const render = () => {
-      if (objectModel && material) {
-        objectModel.rotation.y += 0.01;
-      }
-      if (objectShadow) {
-        objectShadow.rotation.y += 0.01;
-      }
       requestAnimationFrame(render);
       renderer.render(scene, camera);
       gl.endFrameEXP();
@@ -196,6 +159,9 @@ export const ScreenViewModel = ({ route }) => {
 
   return (
     <View style={{ height, width }}>
+      <View style={{ position: "absolute", top: 30, zIndex: 10 }}>
+        <Text>{JSON.stringify(logConsole, null, 3)}</Text>
+      </View>
       <GLView
         style={{ height: "100%", width: "100%" }}
         onContextCreate={onContextCreate}
